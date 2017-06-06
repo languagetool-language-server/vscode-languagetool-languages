@@ -1,0 +1,23 @@
+apply plugin: 'java'
+apply plugin: 'application'
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile '${package}'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/java']
+        }
+        resources {
+            srcDirs = ['src/resources']
+        }
+    }
+}
+
+// Define the main class for the application
+mainClassName = 'App'

@@ -1,0 +1,24 @@
+{
+  "name": "vscode-languagetool-languagepackage-generator",
+  "version": "0.0.1",
+  "description": "Script to generate language-specific packages for vscode-languagetool",
+  "main": "src/js/app.js",
+  "scripts": {
+    "test": "mocha -t 8000 test/js/",
+    "start": "node --use_strict src/js/app.js"
+  },
+  "author": "Adam Voss",
+  "publisher": "adamvoss",
+  "license": "Apache-2.0",
+  "engines": {
+    "vscode": "^1.8.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.0.1",
+    "chai-as-promised": "^6.0.0",
+    "l": "^0.5.1",
+    "mocha": "^3.4.2",
+    "vsce": "^1.22.0"
+  }
+}
