@@ -4,7 +4,7 @@
   "description": "Script to generate language-specific packages for vscode-languagetool",
   "main": "src/js/app.js",
   "scripts": {
-    "test": "mocha -t 8000 test/js/",
+    "test": "mocha -t 16000 test/js/",
     "start": "node --use_strict src/js/app.js"
   },
   "author": "Adam Voss",
@@ -19,6 +19,7 @@
     "chai-as-promised": "^6.0.0",
     "l": "^0.5.1",
     "mocha": "^3.4.2",
+    "rewire": "^2.5.2",
     "vsce": "^1.22.0"
   }
 }
