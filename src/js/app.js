@@ -3,6 +3,7 @@ const util = require('util');
 const gradle = require('./gradle.js');
 const fs = require('fs');
 
+const iconTemplate = "img/png/LanguageTool-Icon-${short code}.png";
 
 // https://stackoverflow.com/a/3561711/1072626
 RegExp.escape = function (s) {
@@ -32,7 +33,7 @@ async function getCoreFiles() {
     return readAllJars();
 }
 
-async function writeVscodeignore(coreFiles) {
+async function writeVscodeignore(coreFiles, shortCode) {
     const currentFiles = await util.promisify(fs.readdir)('./build/install/vscode-languagetool-languages/lib/')
 
     const difference = (arr1, arr2) => arr1.filter(x => arr2.indexOf(x) == -1);
@@ -44,7 +45,23 @@ async function writeVscodeignore(coreFiles) {
     await util.promisify(fs.writeFile)('.vscodeignore',
         "*\n" +
         "*/**\n" +
+        "!README.md\n" +
+        "!LICENSE.txt\n" +
+        "!ACKNOWLEDGMENTS.md\n" +
+        `!${templateReplace('short code', shortCode, iconTemplate)}\n` + 
         filesToInclude.map(s => '!build/install/vscode-languagetool-languages/lib/' + s).join('\n'))
+}
+
+function getLanguageShortCode(packageName) {
+    const re = /language-(.*):/
+    return re.exec(packageName)[1]
+}
+
+async function setPackageIcon(shortCode){
+    const text = await util.promisify(fs.readFile)('package.json', 'utf8')
+    const json = JSON.parse(text)
+    json.icon = templateReplace('short code', shortCode, iconTemplate)
+    return util.promisify(fs.writeFile)('package.json', JSON.stringify(json))
 }
 
 async function main() {
@@ -53,17 +70,19 @@ async function main() {
     await writeGradleBuild("org.languagetool:language-all:3.7");
     const packages = await gradle.firstLevelDependencies();
     const coreFiles = await getCoreFiles();
-
-    console.log(packages.join("\n"));
+    
+    const json = JSON.parse(await util.promisify(fs.readFile)('package.json', 'utf8'))
+    const version = json.version
 
     for (const packageName of packages) {
+        const shortCode = getLanguageShortCode(packageName)        
         await writeGradleBuild(packageName)
         await gradle.exec('installDist')
-        await writeVscodeignore(coreFiles)
-        // TODO: Implement the following command
-        //await gradle.exec('run')
-        // TODO: Control output name and directory
-        await createVSIX()
+        await writeVscodeignore(coreFiles, shortCode)
+        await gradle.exec('run')
+        console.log(shortCode)
+        await setPackageIcon(shortCode);
+        await createVSIX({packagePath: `vscode-languagetool-${shortCode}-${version}.vsix`})
     }
 }
 
@@ -73,3 +92,4 @@ module.exports.gradle = gradle;
 module.exports.writeGradleBuild = writeGradleBuild;
 module.exports.writeVscodeignore = getCoreFiles;
 module.exports.main = main;
+module.exports.setPackageIcon = setPackageIcon;

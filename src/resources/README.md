@@ -3,7 +3,7 @@
 Provides language support for ${Language} in when using [LanguageTool for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=adamvoss.vscode-languagetool).  This enables you to do offline grammar checking of ${Language} in Visual Studio Code.
 
 ## Usage
-Set `languageTool.language` to **${Short code}** to configure the checking language as ${Language}.  You can install as many language support extensions as you like and change between them using this configuration.
+Set `languageTool.language` to **${short code}** to configure the checking language as ${Language}.  You can install as many language support extensions as you like and change between them using this configuration.
 
 ## Features
 * Issue highlighting with hover description.
@@ -12,6 +12,12 @@ Set `languageTool.language` to **${Short code}** to configure the checking langu
 
 ## Requirements
 Java 8+ is required.
+
+## Extension Settings
+
+This extension makes the following values valid for the `languageTool.language` setting:
+
+* ${all variants as markdown}
 
 ## Known Issues
 Please report issues or submit pull requests on [GitHub](https://github.com/adamvoss/vscode-languagetool).

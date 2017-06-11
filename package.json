@@ -2,6 +2,7 @@
   "name": "vscode-languagetool-languagepackage-generator",
   "version": "0.0.1",
   "description": "Script to generate language-specific packages for vscode-languagetool",
+  "icon": "img/png/LanguageTool-Icon-${short code}.png",
   "main": "src/js/app.js",
   "scripts": {
     "test": "mocha -t 16000 test/js/",
