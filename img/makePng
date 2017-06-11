@@ -1,0 +1,1 @@
+for i in *.svg; do inkscape --export-background=white --export-area-page --export-width=128px --export-height=128px $i --export-png=`echo png/$i | sed -e 's/svg$/png/'`; done
