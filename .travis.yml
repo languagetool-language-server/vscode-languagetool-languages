@@ -1,0 +1,30 @@
+language: java
+dist: trusty
+sudo: false
+jdk:
+- oraclejdk8
+node_js:
+- '8'
+install:
+- nvm install 8
+- nvm alias default 8
+- npm install
+- "./gradlew"
+- "./gradlew -p test/resources installDist"
+script:
+- npm test
+- npm start
+deploy:
+  provider: releases
+  api_key:
+    secure: vNZtPq9uSs7sMOMwxt8k+4vM4/3TZL+IQeqgGvnml3lWl7yMs/zlRC68UZh9902qSOe10qfkkbqKl9VkoItMnPLE01OA5EH6clLsMzzhBtE4hKP6Dd/8edgE67Omc5n3LGkUOx6x6vRAIb+lO9101EmXG6HMhLhoYzre8XHVu2mlZTsE2xWQZ60xvXQwOwrE4NR5tEupJ+EZGLFst0Oicd3ooRONDzIXEhqyj/IHjn7qx36GfpmJtIjShxyuNcbxLBmiHzCSHsSPUy/trztPxjqlg2z8J7DNvdIm7YSjGTNbaxaONqHu4aCXVdyQTM6cdzLWTC7eN4SUfERDk7P+Mwbawn7PGf2x7diDXACTol9YqmeLb/3GGJjWt4w2h6dqO1cKPnMyveRszmIr7xWmmMhx98PRIagVWtwq4qexTg2EQTRjvl4gqbK3C2TGUUfUrXL9XkL4UFiW3dpkexF33qLAJsdyCi29pprwl05vyf4mnipWCdXA971DChZgaQ1KrCzPJ2ife+3f6fPiQySgf5iptSf9MExXDBBusm0pTTVO4U33Lo1t/4jaN98DECvj1Sr7eqowMtDI16Ri8K7bfx+uKwQ+dP17JGqabtg3IssOj/5eLKjExUZfzNP6diG58kvon6jOPh2eCEJ5x2LA9PdHpAFLKG9gsYy5A/eiHds=
+  file: vscode-languagetool-*.vsix
+  file_glob: true
+  skip_cleanup: true
+  on:
+    tags: true
+after_deploy:
+- ./publish-all.sh
+env:
+  global:
+    secure: L3iBHGcXfum+6yhkyMK9PckhjxU6j1n159vYDNDHCPQZagJ7TpZPpj2ZcVTLBG3sbeNalP2CeGFcxI87sdvz9KeemY16NeZHWIuKXuje4kIgHXzWYIPstbBH2jrB/+Ssx7+pDtkvbj7wKdGTAuJxE3iVEPdGhy8j3AlC4dmgcmZ8+f8gFdQlsB3A2jX4X57w9+Xjz8yjM0a7+bhYsp+Lg2IkxVJadoYeiQo7Eb+JYee52pDacxKHUpIBkJzkoOogJvkAkm7tshp3tbgdEbxfs8AjogzVEyHbam6XFY+KucicyV9HgQCGtSS+WZi9qemAskAchl8u34+R9OZ2UW0x37BpCYWH960IcBImKqS4tgc+CYppy7KzI+IliXoOul15vSGqpJ93PujkZs4lPpQpXiq4jepG8gYuYpphASgTr4MP0rtXTiFlTmR8ob+SqTYJ0zYqSwjR3BbGPTTwTsCh5hnhLp0QPCrrvTD42ycBd4ZZqnlrNcMDNTvfkdOXrNh2uwSj8sCrKWYE77Dqa+EOcThzCDHFpa40TYMutleT5/VMhJl2E4HP1D+gZ2OIZ+YBwLDtrxpAJGZW1xWMnShlp6r2YgA4ceKGkV4+f3Kdus54XefMcf79VXVlFqW++j6YlWomMNuV5clwhVe2xzosKumcnn3yYLsZ2mHwKsKxBSk=

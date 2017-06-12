@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'application'
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.languagetool:language-all:3.7'
+}
+
+// Define the main class for the application
+mainClassName = 'App'
+
