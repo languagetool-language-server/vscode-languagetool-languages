@@ -11,10 +11,10 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDirs = ['src/java']
+            srcDirs = ['../src/java']
         }
         resources {
-            srcDirs = ['src/resources']
+            srcDirs = ['../src/resources']
         }
     }
 }

@@ -1,0 +1,5 @@
+.vscodeignore
+README.md
+build.gradle
+build/
+package.json
