@@ -6,6 +6,8 @@ jdk:
 node_js:
 - "8"
 install:
+- nvm install 8
+- nvm alias default 8
 - npm install
 script:
 - npm test
