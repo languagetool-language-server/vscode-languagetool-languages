@@ -3,9 +3,10 @@ const rewire = require('rewire');
 const chai = require('chai');
 const assert = chai.assert;
 
-const gradle = rewire('../../src/js/gradle.js');
+const Gradle = rewire('../../src/js/gradle.js');
+const gradle = Gradle('test/resources/');
 
-const execute = gradle.__get__('execute');
+const execute = Gradle.__get__('execute');
 
 describe('execute', function () {
   it('should pass output', async function () {
@@ -27,7 +28,6 @@ it('should fail on unknown command', function () {
 
 describe('gradle_firstLevelDependencies', function () {
   it('should contain items matching expected pattern', async function () {
-    console.log(gradle.firstLevelDependencies);
     const packages = await gradle.firstLevelDependencies()
     packages.forEach(function (element) {
       assert.match(element, /^org.languagetool:language-(.*):3.\d+$/)

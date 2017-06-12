@@ -20,11 +20,11 @@ describe('writeGradleBuild', function () {
 
       await app.writeGradleBuild('com.whatever')
 
-      assert((await util.promisify(fs.stat)('./build.gradle')).isFile(), 'file should exist')
+      assert((await util.promisify(fs.stat)(app.outputDir + 'build.gradle')).isFile(), 'file should exist')
 
-      assert.match(await util.promisify(fs.readFile)('./build.gradle'), /com\.whatever/)
+      assert.match(await util.promisify(fs.readFile)(app.outputDir + 'build.gradle'), /com\.whatever/)
 
-      return util.promisify(fs.unlink)('./build.gradle')
+      return util.promisify(fs.unlink)(app.outputDir + 'build.gradle')
   })
 
     it('should overwrite existing files', async function () {
@@ -32,8 +32,8 @@ describe('writeGradleBuild', function () {
 
       await app.writeGradleBuild('com.whatever')
       await app.writeGradleBuild('completely.different')
-      assert.match(await util.promisify(fs.readFile)('./build.gradle'), /completely\.different/)
+      assert.match(await util.promisify(fs.readFile)(app.outputDir + 'build.gradle'), /completely\.different/)
 
-      return util.promisify(fs.unlink)('./build.gradle')
+      return util.promisify(fs.unlink)(app.outputDir + 'build.gradle')
   })
 })

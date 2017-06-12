@@ -2,38 +2,37 @@
 
 const util = require('util');
 
-async function execute(command, callback) {
-    const exec = util.promisify(require('child_process').exec);
-
-    const {stdout, stderr} = await exec(command)
-    return stdout
-};
-
-function gradle(gradleArgs) {
-    return execute('./gradlew ' + gradleArgs)
-}
-
-RegExp.prototype.execAll = function(string) {
+const RegExpExecAll = function (regexp, string) {
     var match = null;
     var matches = new Array();
-    while (match = this.exec(string)) {
+    while (match = regexp.exec(string)) {
         var matchArray = [];
         matches.push(match[1]);
     }
     return matches;
+};
+
+async function execute(command, callback) {
+    const exec = util.promisify(require('child_process').exec);
+
+    const { stdout, stderr } = await exec(command)
+    return stdout
 }
 
-async function gradle_firstLevelDependencies() {
-    const output = await gradle('dependencies -p test/resources --configuration default')
-    const firstLevel = /^     [\\+]--- (.*)$/mg
-    const matches = firstLevel.execAll(output)
-    return matches
-}
+function Gradle(projectPath) {
+    const gradle = {
+        exec: function (gradleArgs) {
+            return execute('./gradlew ' + (projectPath ? `-p ${projectPath} ` : '') + gradleArgs)
+        },
+        firstLevelDependencies: async function () {
+            const output = await this.exec('dependencies --configuration default')
+            const firstLevel = /^     [\\+]--- (.*)$/mg
+            const matches = RegExpExecAll(firstLevel, output)
+            return matches
+        }
+    }
 
-
-const Gradle = {
-    exec: gradle,
-    firstLevelDependencies: gradle_firstLevelDependencies,
+    return gradle;
 }
 
 module.exports = Gradle;

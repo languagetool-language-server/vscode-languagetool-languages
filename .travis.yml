@@ -1,0 +1,21 @@
+language: java
+dist: trusty
+sudo: false
+jdk:
+- oraclejdk8
+node_js:
+- "8"
+install:
+- npm install
+script:
+- npm test
+- npm start
+deploy:
+  provider: releases
+  api_key:
+    secure: vNZtPq9uSs7sMOMwxt8k+4vM4/3TZL+IQeqgGvnml3lWl7yMs/zlRC68UZh9902qSOe10qfkkbqKl9VkoItMnPLE01OA5EH6clLsMzzhBtE4hKP6Dd/8edgE67Omc5n3LGkUOx6x6vRAIb+lO9101EmXG6HMhLhoYzre8XHVu2mlZTsE2xWQZ60xvXQwOwrE4NR5tEupJ+EZGLFst0Oicd3ooRONDzIXEhqyj/IHjn7qx36GfpmJtIjShxyuNcbxLBmiHzCSHsSPUy/trztPxjqlg2z8J7DNvdIm7YSjGTNbaxaONqHu4aCXVdyQTM6cdzLWTC7eN4SUfERDk7P+Mwbawn7PGf2x7diDXACTol9YqmeLb/3GGJjWt4w2h6dqO1cKPnMyveRszmIr7xWmmMhx98PRIagVWtwq4qexTg2EQTRjvl4gqbK3C2TGUUfUrXL9XkL4UFiW3dpkexF33qLAJsdyCi29pprwl05vyf4mnipWCdXA971DChZgaQ1KrCzPJ2ife+3f6fPiQySgf5iptSf9MExXDBBusm0pTTVO4U33Lo1t/4jaN98DECvj1Sr7eqowMtDI16Ri8K7bfx+uKwQ+dP17JGqabtg3IssOj/5eLKjExUZfzNP6diG58kvon6jOPh2eCEJ5x2LA9PdHpAFLKG9gsYy5A/eiHds=
+  file: "vscode-languagetool-*.vsix"
+  file_glob: true
+  skip_cleanup: true
+  on:
+    tags: true

@@ -6,6 +6,10 @@
     "icon": "img/png/LanguageTool-Icon-${short code}.png",
     "author": "Adam Voss",
     "publisher": "adamvoss",
+    "preview": true,
+    "extensionDependencies": [
+        "adamvoss.vscode-languagetool"
+    ],
     "repository": {
         "url": "https://github.com/adamvoss/vscode-languagetool"
     },
@@ -26,14 +30,5 @@
     ],
     "categories": [
         "Other"
-    ],
-    "dependencies": {},
-    "devDependencies": {
-        "chai": "^4.0.1",
-        "chai-as-promised": "^6.0.0",
-        "l": "^0.5.1",
-        "mocha": "^3.4.2",
-        "rewire": "^2.5.2",
-        "vsce": "^1.22.0"
-    }
+    ]
 }
