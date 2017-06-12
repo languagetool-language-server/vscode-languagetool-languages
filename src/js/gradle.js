@@ -1,6 +1,6 @@
 "use strict";
 
-const util = require('util');
+const {promisify} = require('util');
 
 const RegExpExecAll = function (regexp, string) {
     var match = null;
@@ -13,7 +13,7 @@ const RegExpExecAll = function (regexp, string) {
 };
 
 async function execute(command, callback) {
-    const exec = util.promisify(require('child_process').exec);
+    const exec = promisify(require('child_process').exec);
 
     const { stdout, stderr } = await exec(command)
     return stdout
