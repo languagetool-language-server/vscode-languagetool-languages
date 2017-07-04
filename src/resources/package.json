@@ -1,7 +1,7 @@
 {
     "name": "vscode-languagetool-${short code}",
     "displayName": "${Language} Support for LanguageTool",
-    "version": "0.0.1",
+    "version": "3.8.0",
     "description": "Enables grammar checking of ${Language} in LanguageTool for Visual Studio Code.",
     "icon": "img/png/LanguageTool-Icon-${short code}.png",
     "author": "Adam Voss",

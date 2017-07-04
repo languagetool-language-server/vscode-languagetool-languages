@@ -5,7 +5,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.languagetool:language-all:3.7'
+    compile 'org.languagetool:language-all:3.8'
 }
 
 // Define the main class for the application

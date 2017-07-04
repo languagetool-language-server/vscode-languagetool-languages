@@ -28,7 +28,7 @@ async function readAllJars() {
 }
 
 async function getCoreFiles() {
-    await writeGradleBuild("org.languagetool:languagetool-core:3.7");
+    await writeGradleBuild("org.languagetool:languagetool-core:3.8");
 
     await gradle.exec('installDist');
 
@@ -57,7 +57,7 @@ function getLanguageShortCode(packageName) {
 async function main() {
     const { createVSIX } = require('vsce')
 
-    await writeGradleBuild("org.languagetool:language-all:3.7");
+    await writeGradleBuild("org.languagetool:language-all:3.8");
     const packages = await gradle.firstLevelDependencies();
     const coreFiles = await getCoreFiles();
 

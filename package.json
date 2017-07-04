@@ -1,6 +1,6 @@
 {
   "name": "vscode-languagetool-languagepackage-generator",
-  "version": "0.0.1",
+  "version": "3.8.0",
   "description": "Script to generate language-specific packages for vscode-languagetool",
   "main": "src/js/app.js",
   "scripts": {
